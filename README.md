@@ -1,1 +1,1 @@
-# metric-dimension-directed-graphs
+# Metric-dimension-directed-graphs
