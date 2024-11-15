@@ -22,7 +22,7 @@
 \newtheorem*{primer}{Primer}
 
 
-\title{%
+\title{
   Metrična dimenzija usmerjenih grafov \\
   \large Projekt pri predmetu finančni praktikum\\}
      
@@ -35,8 +35,7 @@
 
 \section{Uvod in definicije}
 
-Tema projektne naloge je metrična dimenzija usmerjenih grafov. V prvem delu želimo zapisati 
-celoštevilski linearni program za določanje metrične dimenzije usmerjenih grafov. V drugem delu 
+V prvem delu želimo zapisati celoštevilski linearni program za določanje metrične dimenzije usmerjenih grafov. V drugem delu 
 pa si podrobneje ogledamo posebno skupino grafov - cirkulantske grafe $C(n, d)$ s povezavami v smeri
 urinega kazalca. Za majhne vrednosti parametrov $n$ in  $d$ želimo preveriti metrično dimenzijo, nato 
 pa izpeljati splošen rezultat za grafe iz te skupine. Začnimo z nekaj osnovnimi pojmi
@@ -81,9 +80,56 @@ in definicijami.
 
 \begin{itemize}
     \item Zapisati celoštevilski linearni program za določanje metrične dimenzije usmerjenga grafa. 
-    \item Poiskati metrične dimenzije naključnih usmerjenih grafov.
+    \item Poiskati metrične dimenzije $C(n, d).$ za majhne $n$ in $d$.
     \item Uporaba programa za določitev splošne formule za metrično dimenzijo $C(n, d).$
 \end{itemize}
+
+
+
+\subsection*{Trenutna ideja za CLP:}
+
+\noindent
+\textbf{Vhodni podatki:}
+\begin{itemize}
+    \item \textbf{Seznam vozlišč} \( V \): predstavimo kot seznam 
+    \item \textbf{Matrika razdalj} \( D \): matrika, kjer je \( D[i][j] \) razdalja med vozliščema \( i \) in \( j \) v grafu. Razdalja je enaka  $\infty$ , če vozlišča niso neposredno povezana.
+    Za izračun razdalj lahko na primer uporabimo algortem Floyd-Warshall ali BFS.
+\end{itemize}
+
+\subsubsection*{Ciljna funkcija:}
+Minimiziramo število vozlišč v razrešljivi množici:
+\begin{equation*}
+\text{Minimiziraj:} \quad \sum_{v \in V} x_v
+\end{equation*}
+kjer je $x_v$ binarna spremenljivka, ki je enaka $1$, če je vozlišče $v$ vključeno v razrešljivo množico, in $0$, če ni.
+
+\subsubsection*{Omejitve:}
+
+\textbf{Pogoj razločljivosti:}
+   Za vsak par različnih vozlišč $u$ in $v$ mora obstajati vsaj eno vozlišče $w$, ki jih razlikuje po razdalji.
+   \begin{equation*}
+   \sum_{w \in V} z_{u,v}^w \geq 1, \quad \forall u, v \in V, \; u \neq v
+   \end{equation*}
+   kjer je $z_{u,v}^w$ pomožna binarna spremenljivka, ki je enaka $1$, če vozlišče $w$ razlikuje par $(u, v)$ po razdalji.
+
+\noindent
+\textbf{Povezava med $z_{u,v}^w$ in $x_w$:}
+   Pomožna spremenljivka $z_{u,v}^w$ lahko postane $1$ samo, če je vozlišče $w$ v razrešljivi množici (tj. če je $x_w = 1$). 
+   \begin{equation*}
+   z_{u,v}^w \leq x_w, \quad \forall u, v, w \in V, \; u \neq v
+   \end{equation*}
+
+\noindent
+\textbf{Pogoji za binarne spremenljivke:}
+    Vse spremenljivke morajo biti binarne, da zagotovimo celoštevilsko rešitev:
+   \begin{equation*}
+   x_v \in \{0, 1\}, \quad \forall v \in V
+   \end{equation*}
+   \begin{equation*}
+   z_{u,v}^w \in \{0, 1\}, \quad \forall u, v, w \in V, \; u \neq v
+   \end{equation*}
+
+
 
 \bibliographystyle{plain}
 \bibliography{viri}
