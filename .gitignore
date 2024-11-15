@@ -1,3 +1,4 @@
+*.bib
 __pycache__
 .DS_Store
 thumbs.db
@@ -11,4 +12,3 @@ thumbs.db
 *.out
 *.pyc
 *.synctex.gz
-*.bib
