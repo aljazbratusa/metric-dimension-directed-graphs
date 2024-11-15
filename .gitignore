@@ -9,6 +9,6 @@ thumbs.db
 *.fls
 *.log
 *.out
-*.bib
 *.pyc
 *.synctex.gz
+viri.bib
