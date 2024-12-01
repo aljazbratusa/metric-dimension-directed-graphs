@@ -1,1 +1,1 @@
-# Metric dimension directed graph
+# Metric dimension of directed graph
