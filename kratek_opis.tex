@@ -1,3 +1,4 @@
+
 \documentclass[a4paper,12pt]{article}
 \usepackage[slovene]{babel}
 \usepackage[utf8]{inputenc}
@@ -6,9 +7,11 @@
 \usepackage{amsmath, amsfonts, amsthm, amssymb}
 \usepackage{a4wide}
 
-\renewcommand\qedsymbol{$\blacksquare$}
+\bibliographystyle{plain}
 
 \newtheorem{izrek}{Izrek}[section]
+
+
 
 \theoremstyle{definition}
 \newtheorem{definicija}{Definicija}[section]
@@ -27,7 +30,7 @@
   \large Projekt pri predmetu finančni praktikum\\}
      
 
-\author{Aljaž Bratuša, Maša Popovič}
+\author{Maša Popovič}
 \date{10. 11. 2024}
 
 \begin{document}
@@ -46,34 +49,42 @@ in definicijami.
     množico povezav $E$ ter $u,v \in V.$ Za vozlišče $v$ velja, da je \textit{dosegljivo}
     iz $u$, če med $u$ in $v$ obstaja pot. Za dolžino poti med vozliščema vzamemo dolžino
     najkrajše poti.
+    \\
 \end{definicija}
+
 
 \begin{definicija}
     Naj bo $G$ graf z množico vozlišč $V$ in množico povezav $E$ ter $u,v,w \in V.$ Za vozlišče 
     $w$ pravimo, da \textit{razreši} par vozlišč $u$ in $v,$če velja, da sta $u$ in $v$ dosegljivi
-    iz $w$ na različnih razdaljah, t.j. $d(u,w) \neq d(v,w).$ Množica vozlišč $S$ razreši graf $G,$ če 
+    iz $w$ na različnih razdaljah, t.j. $d(w,u) \neq d(w,v).$ Množica vozlišč $S$ razreši graf $G,$ če 
     za vsak par vozlišč v $G$ velja, da ga razreši nek element $S.$ \textit{Metrična dimenzija} grafa $G$
     je kardinalnost najmanjše množice, ki zadošča prejšnji lastnosti. To označimo z $\beta(G).$
+    \\
 \end{definicija}
 
 \begin{opomba}
     Množica $S,$ ki razreši dani graf $G$ ni nujno enolična. Preprost primer je npr. graf, ki je pot. Potem je 
     metrična dimenzija enaka $1,$ za vozlišče v $S$ pa lahko vzamemo eno izmed robnih vozlišč grafa $G.$
+    \\
 \end{opomba}
 
 \begin{definicija}
     Naj bo $G$ graf z množico vozlišč $V$ in množico povezav $E.$
     Naj bo $W = \{w_1, w_2, \dots ,w_n \},  W \subseteq V$ urejena množica in $v \in V.$
-    Oznaki $$r(v|W) = (d(v, w_1), d(v, w_2), \dots ,d(v, w_n))$$ pravimo metrična 
+    Oznaki $$r(v|W) = (d (w_1,v), d(w_2,v), \dots ,d(w_n,v))$$ pravimo metrična 
     reprezentacija $v$ glede na množico $W.$ Sledi, da $W$ razreši $G$ natanko tedaj, ko velja 
     $r(u|W) \neq r(v|W)$ za vse $u,v \in V,$ kjer velja $u \neq v.$
+    \\
 \end{definicija}
 
+
 \begin{definicija}
-    Za pozitivni celi števili $n$ in $d$ je cirkulantski graf $C(n, d)$ enostaven graf z vozlišči 
-    ostankov po modulu $n,$ $Z_n = (v_0, v_1, \dots ,v_{n-1})$, kjer velja, da je $i-to$ vozlišče 
-    sosedno vozliščem $v_{i-d}, v_{i-d+1}, \dots ,v_{i-1}, v_{i+1}, \dots ,v_{i-d+1}$ (mod $n$)
-    v $C(n,d).$ \cite{Chau2017}
+    \textit{V smeri urinega kazalca usmerjen cirkulantni graf \( C(n, d) \) }je usmerjen graf z \( n \) vozlišči, kjer so vozlišča označena kot 
+    \( v_0, v_1, \dots, v_{n-1} \). Množica povezav \( E \) vsebuje usmerjene povezave med vozlišči, in sicer vsakemu vozlišču \( v_i \) pripadajo povezave do naslednjih \( d \) vozlišč v smeri urinega kazalca. 
+    Množica povezav je torej podana kot:
+    \[
+    E = \left\{ (v_i, v_{(i+k) \mod n}) : 1 \leq k \leq d \right\}, \quad \text{za vsak } i \in \{0, 1, \dots, n-1\}.
+    \]
 \end{definicija}
 
 \section{Načrt za nadaljnje delo}
@@ -129,9 +140,5 @@ kjer je $x_v$ binarna spremenljivka, ki je enaka $1$, če je vozlišče $v$ vklj
    z_{u,v}^w \in \{0, 1\}, \quad \forall u, v, w \in V, \; u \neq v
    \end{equation*}
 
-
-
-\bibliographystyle{plain}
-\bibliography{viri}
 
 \end{document}
