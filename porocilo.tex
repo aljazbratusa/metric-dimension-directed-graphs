@@ -1,0 +1,353 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage{a4wide}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{titlesec}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Nastavitev za prikaz kode
+\lstset{
+  basicstyle=\ttfamily\tiny,       % Zmanjšana pisava
+  frame=single,                    % Okvir okoli kode
+  showspaces=false,                % Skrij presledke
+  showstringspaces=false,          % Skrij presledke v nizih
+  columns=fullflexible,            % Prilagodljivi presledki
+  keepspaces=true,                 % Ohrani presledke
+  xleftmargin=0.5cm,               % Dodatni levi rob za okvir
+  xrightmargin=0.5cm,              % Dodatni desni rob za okvir
+  breaklines=false,                % Brez prelamljanja vrstic
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}, % Konec vrstice (opcijsko)
+  aboveskip=10pt,                  % Razmik nad kodo
+  belowskip=10pt,                  % Razmik pod kodo  
+  basicstyle=\ttfamily\tiny,
+  language=Python,                % Jezik kode
+  basicstyle=\ttfamily\footnotesize, % Pisava in velikost
+  keywordstyle=\color{blue},      % Barva ključnih besed
+  stringstyle=\color{green!50!black}, % Barva nizov
+  commentstyle=\color{gray},      % Barva komentarjev
+  %backgroundcolor=\color{yellow!10}, % Ozadje
+  %frame=single,                   % Okvir okoli kode
+  literate={č}{{\v{c}}}1    % Zamenjava za č
+             {š}{{\v{s}}}1    % Zamenjava za š
+             {ž}{{\v{z}}}1    % Zamenjava za ž
+             {Č}{{\v{C}}}1    % Zamenjava za Č
+             {Š}{{\v{S}}}1    % Zamenjava za Š
+             {Ž}{{\v{Z}}}1,   % Zamenjava za Ž
+  inputencoding=utf8,       % Podpora za UTF-8 kodiranje
+  basicstyle=\ttfamily,     % Pisava
+}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+
+
+\newtheorem{izrek}{Izrek}[section]
+
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}[section]
+
+\newtheorem{trditev}{Trditev}[section]
+
+\theoremstyle{remark}
+\newtheorem*{opomba}{Opomba}
+
+\theoremstyle{definition}
+\newtheorem*{primer}{Primer}
+
+
+\title{
+  Metrična dimenzija usmerjenih grafov \\
+  \large Projekt pri predmetu finančni praktikum\\}
+     
+
+\author{Maša Popovič}
+\date{\small 13. 12. 2024}
+
+\begin{document}
+\maketitle
+
+\section*{Opis problema}
+
+\begin{itemize}
+    \item Napisati model CLP za določitev metrične dimenzije usmerjenih grafov.
+    \item Pogledati kako se obnaša metrična dimenzija v smeri urinega kazalca usmerjenih cirkulantskih grafov C(n, d). To so močno povezani grafi, torej jim vedno lahko določimo metrično dimenzijo.
+    \item Za mnoge majhne vrednosti n in d, želimo določiti metrično dimenzijo C(n, d) in nato poskusite uganiti/dobiti splošno formulo za metrično dimenzijo C(n, d).
+\end{itemize}
+ 
+\section*{Definicije}
+
+\begin{definicija}
+    Naj bo $G$ usmerjen graf z množico vozlišč $V$ in 
+    množico povezav $E$ ter $u,v \in V.$ Za vozlišče $v$ velja, da je \textit{dosegljivo}
+    iz $u$, če med $u$ in $v$ obstaja pot. Za dolžino poti med vozliščema vzamemo dolžino
+    najkrajše poti.
+    \\
+\end{definicija}
+
+\par
+
+\begin{definicija}
+    Naj bo $G$ graf z množico vozlišč $V$ in množico povezav $E$ ter $u,v,w \in V.$ Za vozlišče 
+    $w$ pravimo, da \textit{razreši} par vozlišč $u$ in $v,$če velja, da sta $u$ in $v$ dosegljivi
+    iz $w$ na različnih razdaljah, t.j. $d(w,u) \neq d(w,v).$ Množica vozlišč $S$ razreši graf $G,$ če 
+    za vsak par vozlišč v $G$ velja, da ga razreši nek element $S.$ \textit{Metrična dimenzija} grafa $G$
+    je kardinalnost najmanjše množice, ki zadošča prejšnji lastnosti. To označimo z $\beta(G).$
+    \\
+\end{definicija}
+
+\begin{opomba}
+    Množica $S,$ ki razreši dani graf $G$ ni nujno enolična. Preprost primer je npr. graf, ki je pot. Potem je 
+    metrična dimenzija enaka $1,$ za vozlišče v $S$ pa lahko vzamemo eno izmed robnih vozlišč grafa $G.$
+    \\
+\end{opomba}
+
+\begin{definicija}
+    Naj bo $G$ graf z množico vozlišč $V$ in množico povezav $E.$
+    Naj bo $W = \{w_1, w_2, \dots ,w_n \},  W \subseteq V$ urejena množica in $v \in V.$
+    Oznaki $$r(v|W) = (d (w_1,v), d(w_2,v), \dots ,d(w_n,v))$$ pravimo metrična 
+    reprezentacija $v$ glede na množico $W.$ Sledi, da $W$ razreši $G$ natanko tedaj, ko velja 
+    $r(u|W) \neq r(v|W)$ za vse $u,v \in V,$ kjer velja $u \neq v.$
+    \\
+\end{definicija}
+
+
+\begin{definicija}
+    \textit{V smeri urinega kazalca usmerjen cirkulantni graf \( C(n, d) \) }je usmerjen graf z \( n \) vozlišči, kjer so vozlišča označena kot 
+    \( v_0, v_1, \dots, v_{n-1} \). Množica povezav \( E \) vsebuje usmerjene povezave med vozlišči, in sicer vsakemu vozlišču \( v_i \) pripadajo povezave do naslednjih \( d \) vozlišč v smeri urinega kazalca. 
+    Množica povezav je torej podana kot:
+    \[
+    E = \left\{ (v_i, v_{(i+k) \mod n}) : 1 \leq k \leq d \right\}, \quad \text{za vsak } i \in \{0, 1, \dots, n-1\}.
+    \]
+\end{definicija}
+
+\section*{Celoštevilski linearni program}
+
+Koda za iskanje metrične dimenzije usmerjenega grafa, ter minimalne razrešljive množice:
+
+\begin{lstlisting}
+def metricna_dimenzija_usmerjenega_grafa(graf): 
+    if not isinstance(graf, DiGraph):
+        return "Napaka: Podani graf ni usmerjen graf."
+    V = graf.vertices()
+
+    razdalje = {u: {v: graf.distance(u, v) for v in V} for u in V}
+    
+    lp = MixedIntegerLinearProgram(maximization=False)
+    x = lp.new_variable(binary=True) 
+    lp.set_objective(sum(x[v] for v in V))
+    
+    for u in V:
+        for v in V:
+            if u != v:
+                vozlisca = [
+                    w for w in V
+                    if razdalje[w][u] != razdalje[w][v] and
+                    razdalje[w][u] < infinity and
+                    razdalje[w][v] < infinity
+                ]
+                if not vozlisca:
+                    return f"Metrične dimenzije ni mogoče določiti"
+            
+                lp.add_constraint(sum(x[w] for w in vozlisca) >= 1)
+    
+    lp.solve()
+    
+    razresljiva_mnozica = [v for v in V if lp.get_values(x[v]) == 1]
+    return razresljiva_mnozica, len(razresljiva_mnozica)
+    \end{lstlisting}
+
+
+\newpage
+\subsection*{Opis programa}
+
+Ta program je implementiran v okolju SageMath in izračuna metrično dimenzijo usmerjenega grafa ter poišče eno razrešljivo množico. 
+Program uporablja metodo linearnega programiranja.
+\\
+\\
+\noindent
+\textbf{1. Preverjanje vrste grafa:}\\
+Prvi korak programa je preverjanje, ali je podani graf usmerjen. Če graf ni usmerjen, se izpiše napaka in program se ustavi.
+\\
+\\
+\noindent
+\textbf{2. Iskanje razdalj:} \\
+Algoritem poišče vse razdalje med poljubnima dvema vozliščema.
+\\
+\\
+\noindent
+\textbf{3. Ustvarjanje linearnega programa:}\\
+Za izračun metrične dimenzije ustvarimo celoštevilski linearni program, kjer so spremenljivke \( x[v] \) binarne, kar pomeni, da lahko vsako vozlišče bodisi izberemo bodisi ne (vrednosti \( 0 \) ali \( 1 \)). Cilj programa je minimizirati vsoto vseh teh spremenljivk, kar pomeni, da želimo najti čim manjše število vozlišč, ki bodo zadovoljila vse pogoje.
+\\
+\\
+\noindent
+\textbf{4. Dodajanje omejitev:}\\
+Za vsak par vozlišč \( u \) in \( v \) v grafu preverimo, ali obstaja vozlišče \( w \), iz katerega razdalji do \( u \) in \( v \) nista enaki, vendar sta končni. Če takšno vozlišče \( w \) obstaja, dodamo omejitev, ki zagotavlja, da bo vsaj eno od teh vozlišč izbrano:
+
+\[
+\sum_{w \in W(u, v)} x[w] \geq 1
+\]
+
+\noindent
+Če pa takšno vozlišče za določeni par vozlišč ne obstaja, program vrne napako, ki pove, da metrične dimenzije ni mogoče določiti.
+\\
+\\
+\noindent
+\textbf{4. Rezultat:}\\
+Ko so vse omejitve dodane, program izvede optimizacijo in poišče rešitev linearnega programa. 
+Cilj je, da minimiziramo množico, ki razreši graf. Program to množico tudi vrne, poleg tega pa vrne tudi njeno kardinalnost tj. metrično dimenzijo grafa.
+
+
+
+\subsection*{Časovna zahtevnost programa}
+
+Naj bo V število vozlišč v grafu, E pa število povezav.
+\begin{itemize}
+    \item \textbf{Preverjanje usmerjenosti grafa:} $O(1)$ - enostavno preverjanje vrste grafa.
+    \item \textbf{Seznam vozlišč:} $O(V)$ 
+    \item \textbf{Izračun razdalj med vsemi pari vozlišč:} $O(V^2 + V \cdot E)$ - pri usmerjenem grafu je razdalja $(u,v)$ običajno izračunana z algoritmom BFS.
+    Nato imamo zanko, ki iterira po vseh vozliščih $w$ in preverja pogoje. Za izračun razdalj od enega vozlišča $u$ do vseh ostalih vozlišč $v$ je časovna zahtevnost $O(V+E)$.
+    To izvajamo za vsak $u \in V$, kar daje: $O(V\cdot(V+E))$
+    \item \textbf{Omejitve:} $O(V^3)$ - tukaj imamo dve zanki ki iterirata po vseh parih $(u, v)$, kar vzame $O(V^2)$ časa. 
+    Vsak pogoj preveri v konstantnem času, torej skupaj $O(V)$.
+    \item \textbf{Reševanje linearnega programa:} O($2^V$) - reševanje linearnega programa je NP-težak problem, časovna zahtevnost je približno $O(2^V)$ 
+    v najslabšem primeru.
+    \item \textbf{Pridobivanje rezultatov:} $O(V)$
+\end{itemize}
+
+\noindent
+\textbf{Skupna časovna zahtevnost programa} je torej:
+
+\[
+O(V^3 + V \cdot E + 2^V)
+\]
+\noindent
+Časovna zahtevnost bo postala problematična pri večjih grafih, predvsem zaradi iskanja razdalj in reševanja linearnega programa.
+
+
+\subsection*{Generiranje podatkov}
+Najprej sem kodo uporabila na nekaj preprostih usmerjenih grafih. Te grafe sem generirala s funkcijo \texttt{DiGraph}.
+
+\section*{Uporaba CLP na cirkulantnih grafih}
+V drugem delu projekta sem opazovala metrične dimenzije usmerjenih cirkulantnih grafov  \( C(n, d) \). 
+Posamezne cirkulantne grafe sem generirala z naslednjo kodo: 
+\noindent
+\begin{lstlisting}
+def clockwise_circulant_graph(n, d):
+    odmiki = list(range(1, d + 1)) 
+    return digraphs.Circulant(n, odmiki)
+    \end{lstlisting}
+
+\noindent    
+Nato pa sem izračunala metrične dimenzije cirkulantnih grafov $C(n,d)$ za vse $n \leq  40$ in $d < n$.
+Uporabila sem naslednjo kodo:
+
+\begin{lstlisting}
+def generiraj_podatke_za_circulant_graphs_od_do(min_n, max_n):
+    podatki = []  
+    for n in range(min_n, max_n + 1):  
+        for d in range(1, n):  
+            G = clockwise_circulant_graph(n, d) 
+            _, dimenzija = metricna_dimenzija_usmerjenega_grafa(G)  
+            podatki.append((n, d, dimenzija))  
+    return podatki
+
+\end{lstlisting}
+
+\noindent
+Koda deluje dobro za majhne grafe, za večje grafe ($n > 30$) pa koda dela precej počasneje. 
+To je seveda zaradi linearnega programa, ki za večje grafe deluje zelo počasi.
+\\
+\\
+Izračunane metrične dimenzije sem shranila v csv dokument, za enostavnejšo kasnejšo analizo. 
+Rezultate sem prikazala tudi na grafu.
+
+\begin{figure}[H]  
+    \centering
+    \includegraphics[width=0.8\textwidth]{graf.png}  
+    \caption{Metrične dimenzije} 
+    \label{fig:screenshot}  
+\end{figure}
+
+\subsection*{Ugotovitve}
+
+Za poljuben $n$ velja:
+\[
+    \beta(C(n, 1)) = 1
+\]
+\[
+    \beta(C(n, 2)) = 2
+\]
+\[
+    \beta(C(n, n-1)) = n-1
+\]
+
+\noindent
+Za majhne $n$, in sicer $n < 12$ velja:
+\[
+    \beta(C(n, d)) = \left\lfloor \frac{n}{2} \right\rfloor, \quad \text{za} \quad \left\lceil \frac{n}{2} \right\rceil \leq d < n-1 \quad
+\]
+\noindent
+Torej bi lahko za majhne $n$ rekli, da se metrična dimenzija stabilizira, in da je točka stabilizacije $ d = \left\lceil \frac{n}{2} \right\rceil$ .
+Pravilo ni čisto veljavno, saj imamo en proti primer in sicer $\beta(C(10, 6)) = 4$. Po tem pravilu pa bi moglo biti $\beta(C(10, 6)) = 5$. 
+\\
+
+\par 
+\noindent
+Lahko opazimo, da za fiksen $n$ metrične dimenzije naraščajo približno linearno, ko večamo $d$ (za $d < n-1$).
+Pri fiksnem $n$ je maksimalna metrična dimenzija dosežena pri $d = n - 1$, kjer ima vrednost: 
+\[
+    \beta(C(n, n-1)) = n-1
+\]
+
+\noindent
+Za fiksen $n$ in $d < n - 1$ pa je maksimalna metrična dimenzija dosežena ko je $d = n -2$ in $d = n/2$, 
+kjer ima vrednost:
+\[
+    \beta(C(n, n-2)) = \beta\left(C\left(n, \frac{n}{2}\right)\right) = \left\lfloor \frac{n}{2} \right\rfloor
+\]
+
+\noindent
+Za fiksen $n > 4$, je ta maksimum dosežen tudi v $d = n - 3$. Torej:
+\[
+    \beta(C(n, n-3)) = \left\lfloor \frac{n}{2} \right\rfloor \quad \text{za} \quad n > 4
+\]
+\noindent
+Na podlagi ugotovitev, lahko zapišemo \textit{zgornjo mejo}. In sicer, za poljbna $n$ in $d$ velja:
+\[\beta(C(n,d)) \leq n - 1 \quad \text{oz.} \quad  \beta(C(n,d)) \leq d\]  
+\noindent
+Za poljuben $n$ in $d < n-1$ pa velja:
+\[\beta(C(n ,d)) \leq \left\lfloor \frac{n}{2} \right\rfloor\]
+
+\par
+\noindent
+Oglejmo si sedaj cirkulantne grafe oblike $\mathbf{C( cd, d )}$:
+
+\begin{figure}[H]  
+    \centering
+    \includegraphics[width=0.8\textwidth]{graf_cd.png}  
+    \caption{Metrične dimenzije usmerjenih cirkulantnih grafov za $n = cd$} 
+    \label{fig:screenshot}  
+\end{figure}
+
+\noindent
+Opazimo, da za vse $n = c \dot d$, kjer je $c$ neka konstanta, velja:
+\[
+    \beta(C(cd, d)) = d
+\]
+\noindent
+Torej pri fiksnem d velja, da je metrična dimenzija enaka $d$ v vseh tistih $n$, ki so večkratniki števila $d$.
+Torej na primer pri $d = 10$ zavzame maksimume (tj. vrednosti $\beta = 10$) v $ n \in \{20, 30, 40 \dots\} $.
+To pa ne pomeni, da so to edini $n$ pri fiksnem $d$, kjer metrična dimenzija doseže vrednost d. 
+
+
+
+\end{document}

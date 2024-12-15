@@ -12,3 +12,4 @@ thumbs.db
 *.out
 *.pyc
 *.synctex.gz
+*.png
