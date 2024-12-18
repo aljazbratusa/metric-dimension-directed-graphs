@@ -321,16 +321,38 @@ Za fiksen $n > 4$, je ta maksimum dosežen tudi v $d = n - 3$. Torej:
     \beta(C(n, n-3)) = \left\lfloor \frac{n}{2} \right\rfloor \quad \text{za} \quad n > 4
 \]
 \noindent
-Na podlagi ugotovitev, lahko zapišemo \textit{zgornjo mejo}. In sicer, za poljbna $n$ in $d$ velja:
+Na podlagi ugotovitev, lahko zapišemo \textbf{zgornjo mejo}. In sicer, za poljbna $n$ in $d$ velja:
 \[\beta(C(n,d)) \leq n - 1 \quad \text{oz.} \quad  \beta(C(n,d)) \leq d\]  
 \noindent
 Za poljuben $n$ in $d < n-1$ pa velja:
 \[\beta(C(n ,d)) \leq \left\lfloor \frac{n}{2} \right\rfloor\]
 
-
 \par
 \noindent
-Oglejmo si sedaj cirkulantne grafe oblike $\mathbf{C( cd, d )}$:
+\textbf{Boljša zgornja meja:}\\
+\noindent
+Lahko opazimo, da se metrična dimenzija obnaša podobno kot logaritemska funkcija, ko večamo $d$.
+Za $ \lceil n/2 \rceil < d < n-1$ je naslednja zgornja meja bolj natančna:
+\[ \lfloor \sqrt{d}*\ln(d + 1) \rfloor + 1  
+\]
+\noindent
+Torej
+\[
+\text{zgornja meja} = 
+\begin{cases} 
+d & \text{če } d < \lfloor n/2 \rfloor, \\
+\lfloor \sqrt{d}*\ln(d + 1) \rfloor + 1   & \text{če } \lceil n/2 \rceil < d < n-1.
+\end{cases}
+\]
+
+\noindent
+Do tega sem prišla na podlagi opazovanja cirkulantnih grafov za $n \leqslant 40$. 
+Opazila pa sem dva grafa za katera ta meja ne velja. In sicer $C(36,20)$ in $C(37,20)$. Seveda 
+to lahko hitro rešimo, če zgornjo mejo povečamo za ena, vendar izgubimo na natančnosti pri ostalih grafih.
+\bigskip
+\par
+\noindent
+\textbf{Cirkulantni grafi oblike $\mathbf{C( c\cdot d, d )}$}:
 
 \begin{figure}[H]  
     \centering
@@ -340,7 +362,7 @@ Oglejmo si sedaj cirkulantne grafe oblike $\mathbf{C( cd, d )}$:
 \end{figure}
 
 \noindent
-Opazimo, da za vse $n = c \dot d$, kjer je $c$ neka konstanta, velja:
+Opazimo, da za vse $n = c \cdot d$, kjer je $c$ neka konstanta, velja:
 \[
     \beta(C(cd, d)) = d
 \]
@@ -349,6 +371,29 @@ Torej pri fiksnem d velja, da je metrična dimenzija enaka $d$ v vseh tistih $n$
 Torej na primer pri $d = 10$ zavzame maksimume (tj. vrednosti $\beta = 10$) v $ n \in \{20, 30, 40 \dots\} $.
 To pa ne pomeni, da so to edini $n$ pri fiksnem $d$, kjer metrična dimenzija doseže vrednost d. 
 
-
+\newpage
+\noindent
+DODATEK:\\
+\\
+\noindent
+\textbf{Boljša zgornja meja:}\\
+\noindent
+Lahko opazimo, da se metrična dimenzija obnaša podobno kot logaritemska funkcija, ko večamo $d$.
+Za $ \lceil n/2 \rceil < d < n-1$ je naslednja zgornja meja bolj natančna:
+\[ \lfloor \sqrt{d}*\ln(d + 1) \rfloor + 1  
+\]
+\noindent
+Torej
+\[
+\text{zgornja meja} = 
+\begin{cases} 
+d & \text{če } d < \lfloor n/2 \rfloor, \\
+\lfloor \sqrt{d}*\ln(d + 1) \rfloor + 1   & \text{če } \lceil n/2 \rceil < d < n-1.
+\end{cases}
+\]
+\noindent
+Do tega sem prišla na podlagi opazovanja cirkulantnih grafov za $n \leqslant 40$. 
+Opazila pa sem dva grafa za katera ta meja ne velja. In sicer $C(36,20)$ in $C(37,20)$. Seveda 
+to lahko hitro rešimo, če zgornjo mejo povečamo za ena, vendar izgubimo na natančnosti pri ostalih grafih.
 
 \end{document}
