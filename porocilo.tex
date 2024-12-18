@@ -97,7 +97,7 @@
 
 \begin{definicija}
     Naj bo $G$ graf z množico vozlišč $V$ in množico povezav $E$ ter $u,v,w \in V.$ Za vozlišče 
-    $w$ pravimo, da \textit{razreši} par vozlišč $u$ in $v,$če velja, da sta $u$ in $v$ dosegljivi
+    $w$ pravimo, da \textit{razreši} par vozlišč $u$ in $v,$ če velja, da sta $u$ in $v$ dosegljivi
     iz $w$ na različnih razdaljah, t.j. $d(w,u) \neq d(w,v).$ Množica vozlišč $S$ razreši graf $G,$ če 
     za vsak par vozlišč v $G$ velja, da ga razreši nek element $S.$ \textit{Metrična dimenzija} grafa $G$
     je kardinalnost najmanjše množice, ki zadošča prejšnji lastnosti. To označimo z $\beta(G).$
@@ -214,7 +214,7 @@ Naj bo V število vozlišč v grafu, E pa število povezav.
     \item \textbf{Preverjanje usmerjenosti grafa:} $O(1)$ - enostavno preverjanje vrste grafa.
     \item \textbf{Seznam vozlišč:} $O(V)$ 
     \item \textbf{Izračun razdalj med vsemi pari vozlišč:} $O(V^2 + V \cdot E)$ - pri usmerjenem grafu je razdalja $(u,v)$ običajno izračunana z algoritmom BFS.
-    Nato imamo zanko, ki iterira po vseh vozliščih $w$ in preverja pogoje. Za izračun razdalj od enega vozlišča $u$ do vseh ostalih vozlišč $v$ je časovna zahtevnost $O(V+E)$.
+    Za izračun razdalj od enega vozlišča $u$ do vseh ostalih vozlišč $v$ je časovna zahtevnost $O(V+E)$.
     To izvajamo za vsak $u \in V$, kar daje: $O(V\cdot(V+E))$
     \item \textbf{Omejitve:} $O(V^3)$ - tukaj imamo dve zanki ki iterirata po vseh parih $(u, v)$, kar vzame $O(V^2)$ časa. 
     Vsak pogoj preveri v konstantnem času, torej skupaj $O(V)$.
@@ -326,6 +326,7 @@ Na podlagi ugotovitev, lahko zapišemo \textit{zgornjo mejo}. In sicer, za poljb
 \noindent
 Za poljuben $n$ in $d < n-1$ pa velja:
 \[\beta(C(n ,d)) \leq \left\lfloor \frac{n}{2} \right\rfloor\]
+
 
 \par
 \noindent
