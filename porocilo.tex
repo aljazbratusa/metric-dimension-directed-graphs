@@ -279,6 +279,7 @@ Rezultate sem prikazala tudi na grafu.
 
 \subsection*{Ugotovitve}
 
+\begin{trditev}
 Za poljuben $n$ velja:
 \[
     \beta(C(n, 1)) = 1
@@ -290,67 +291,97 @@ Za poljuben $n$ velja:
     \beta(C(n, n-1)) = n-1
 \]
 
+\end{trditev}
+
+\bigskip
+\begin{trditev}
 \noindent
 Za majhne $n$, in sicer $n < 12$ velja:
 \[
     \beta(C(n, d)) = \left\lfloor \frac{n}{2} \right\rfloor, \quad \text{za} \quad \left\lceil \frac{n}{2} \right\rceil \leq d < n-1 \quad
 \]
+\end{trditev}
+\begin{opomba}
 \noindent
 Torej bi lahko za majhne $n$ rekli, da se metrična dimenzija stabilizira, in da je točka stabilizacije $ d = \left\lceil \frac{n}{2} \right\rceil$ .
 Pravilo ni čisto veljavno, saj imamo en proti primer in sicer $\beta(C(10, 6)) = 4$. Po tem pravilu pa bi moglo biti $\beta(C(10, 6)) = 5$. 
 \\
 
-\par 
-\noindent
-Lahko opazimo, da za fiksen $n$ metrične dimenzije naraščajo približno linearno, ko večamo $d$ (za $d < n-1$).
+\end{opomba}
+
+
+\begin{trditev}
+Za fiksen $n$ in majhne $d$ metrične dimenzije naraščajo približno linearno, ko večamo $d$ (za $d \leq n/2 $).
 Pri fiksnem $n$ je maksimalna metrična dimenzija dosežena pri $d = n - 1$, kjer ima vrednost: 
 \[
     \beta(C(n, n-1)) = n-1
-\]
+\]   
+\end{trditev}
 
-\noindent
-Za fiksen $n$ in $d < n - 1$ pa je maksimalna metrična dimenzija dosežena ko je $d = n -2$ in $d = n/2$, 
+\begin{trditev}
+Za fiksen $n$ in $d < n - 1$  je maksimalna metrična dimenzija dosežena ko je $d = n -2$ in $d = n/2$, 
 kjer ima vrednost:
 \[
     \beta(C(n, n-2)) = \beta\left(C\left(n, \frac{n}{2}\right)\right) = \left\lfloor \frac{n}{2} \right\rfloor
 \]
-
-\noindent
-Za fiksen $n > 4$, je ta maksimum dosežen tudi v $d = n - 3$. Torej:
+Za fiksen $n > 4$, je ta maksimum vedno dosežen tudi v $d = n - 3$. Torej:
 \[
     \beta(C(n, n-3)) = \left\lfloor \frac{n}{2} \right\rfloor \quad \text{za} \quad n > 4
-\]
-\noindent
-Na podlagi ugotovitev, lahko zapišemo \textbf{zgornjo mejo}. In sicer, za poljbna $n$ in $d$ velja:
+\] 
+\end{trditev}
+
+\begin{trditev}[Zgornja meja]
+Za poljbna $n$ in $d$ velja:
 \[\beta(C(n,d)) \leq n - 1 \quad \text{oz.} \quad  \beta(C(n,d)) \leq d\]  
 \noindent
 Za poljuben $n$ in $d < n-1$ pa velja:
-\[\beta(C(n ,d)) \leq \left\lfloor \frac{n}{2} \right\rfloor\]
+\[\beta(C(n ,d)) \leq \left\lfloor \frac{n}{2} \right\rfloor\]   
+\end{trditev}
 
-\par
+\bigskip
 \noindent
-\textbf{Boljša zgornja meja:}\\
+Kot sem že omenila se pri fiksnem $n$ in majhnem $d$ metrična dimenzija obnaša linearno.
+Za večje $d$ pa temu več ni tako. Namreč raste precej počasneje kot raste $d$.
+Torej lahko bi rekli, da se pri fiksnem $n$ obnaša podobno kot logaritemska funkcija, ko večamo $d$. 
+Iz tega sledi izboljšava zgornje meje.
 \noindent
-Lahko opazimo, da se metrična dimenzija obnaša podobno kot logaritemska funkcija, ko večamo $d$.
+Do izboljšave sem prišla na podlagi opazovanja cirkulantnih grafov za $n \leqslant 40$. 
+
+\begin{trditev}[Boljša zgornja meja]
+
 Za $ \lceil n/2 \rceil < d < n-1$ je naslednja zgornja meja bolj natančna:
-\[ \lfloor \sqrt{d}*\ln(d + 1) \rfloor + 1  
+\[ \lfloor \sqrt{d} \cdot \ln(d + 1) \rfloor + 2 
 \]
 \noindent
 Torej
 \[
-\text{zgornja meja} = 
+\beta(C(n ,d)) \leq 
 \begin{cases} 
 d & \text{če } d \leq  \lfloor n/2 \rfloor, \\
-\lfloor \sqrt{d}*\ln(d + 1) \rfloor + 1   & \text{če } \lceil n/2 \rceil < d < n-1.
+\lfloor \sqrt{d} \cdot \ln(d + 1) \rfloor + 2   & \text{če } \lceil n/2 \rceil < d < n-1.
 \end{cases}
 \]
 
+\end{trditev}
+
+\begin{opomba}
+Nova zgornja meja je boljša od prejšnje,
+ saj je bolj natančna. Sem pa opazila tudi to, da če mejo zmanjšam za ena, torej rečem, da je metrična dimenzija grafa $C(n, d)$ manjša ali enaka
+ $\lfloor \sqrt{d} \cdot \ln(d + 1) \rfloor + 1$, potem to velja za skoraj vse $n \leq 40$. 
+Edina dva grafa za katera ta meja ne velja sta $C(36,20)$ in $C(37,20)$. Res je, da s tem ko zmanjšamo mejo, ta ne velja
+več za vse grafe, je pa tudi res, da ob enem dobimo tudi bolj natančne zgornje meje za vse tiste grafe, kjer je zgornja meja še vedno ustrezna .
+\end{opomba}
 \noindent
-Do tega sem prišla na podlagi opazovanja cirkulantnih grafov za $n \leqslant 40$. 
-Opazila pa sem dva grafa za katera ta meja ne velja. In sicer $C(36,20)$ in $C(37,20)$. Seveda 
-to lahko hitro rešimo, če zgornjo mejo povečamo za ena, vendar izgubimo na natančnosti pri ostalih grafih.
-\bigskip
-\par
+Na sliki 2 so prikazane izboljšane zgornje meje za metrično dimenzijo. Slika je primerna za primerjavo z dejanskimi metričnimi dimenzijami,
+ki so prikazane na sliki 1, saj lahko vidimo kako se približamo dejanski dimenziji. 
+
+\begin{figure}[H]  
+    \centering
+    \includegraphics[width=0.8\textwidth]{zgornje_meje.png}  
+    \caption{Ocenjene zgornje meje za metrične dimenzije usmerjenih cirkulantnih grafov} 
+    \label{fig:screenshot}  
+\end{figure}
+
 \noindent
 \textbf{Cirkulantni grafi oblike $\mathbf{C( c\cdot d, d )}$}:
 
@@ -362,10 +393,14 @@ to lahko hitro rešimo, če zgornjo mejo povečamo za ena, vendar izgubimo na na
 \end{figure}
 
 \noindent
-Opazimo, da za vse $n = c \cdot d$, kjer je $c$ neka konstanta, velja:
+\begin{trditev}
+\noindent
+Za vse $n = c \cdot d$, kjer je $c$ neka konstanta, velja:
 \[
     \beta(C(cd, d)) = d
 \]
+\end{trditev}
+
 \noindent
 Torej pri fiksnem d velja, da je metrična dimenzija enaka $d$ v vseh tistih $n$, ki so večkratniki števila $d$.
 Torej na primer pri $d = 10$ zavzame maksimume (tj. vrednosti $\beta = 10$) v $ n \in \{20, 30, 40 \dots\} $.
